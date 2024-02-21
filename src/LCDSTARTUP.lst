@@ -1,0 +1,319 @@
+  Wed Feb 21 2024 11:57                                                                                                Page 1
+
+    "W65C02SXB Startup for LCD - LCDSTARTUP.asm"
+    
+
+                                             ***************************************
+                                             **      WDC 65C02 Macro Assembler    **
+                                             **                                   **
+                                             **     Version 3.49.1- Feb  6 2006    **
+                                             ***************************************
+
+     1                        ; File: LCDSTARTUP.asm
+     2                        ; 
+     3                        
+     4                        
+     5                        
+     6                        ;/*
+     7                        ;***************************************************************************
+     8                        ; This section to be modified to move away from code written by David Gray 
+     9                        ;***************************************************************************
+    10                        
+    11                             PW 128         ;Page Width (# of char/line)
+    12                             PL 60          ;Page Length for HP Laser
+    13                             INCLIST ON     ;Add Include files in Listing
+    14                        
+    15                        				;*********************************************
+    16                        				;Test for Valid Processor defined in -D option
+    17                        				;*********************************************
+    18                        	IF	USING_02
+    19                        	ELSE
+    20                        		EXIT         "Not Valid Processor: Use -DUSING_02, etc. ! ! ! ! ! ! ! ! ! ! ! !"
+    21                        	ENDIF
+    22                        
+    23                        
+    24                        
+    25                        
+    26                        ;****************************************************************************
+    27                        ;****************************************************************************
+    28                        ; End of testing for proper Command line Options for Assembly of this program
+    29                        ;****************************************************************************
+    30                        ;****************************************************************************
+    31                        
+    32                        
+    33                        			title  "W65C02SXB Startup for LCD - LCDSTARTUP.asm"
+    34                        			sttl
+    35                        ;*/
+    36                        
+    37                        
+    38                        ; bgnpkhdr
+    39                        ;***************************************************************************
+    40                        ;  FILE_NAME: LCDSTARTUP.asm
+    41                        ;
+    42                        ;  DATA_RIGHTS: (C) David Cramer 2024
+    43                        ;				[Modified from code written by David Gray]
+    44                        ;
+    45                        ;
+    46                        ;  TITLE: LCDSTARTUP
+    47                        ;
+    48                        ;  DESCRIPTION: This File describes the WDC65C02sxb Startup program for LCD.
+    49                        ;
+  Wed Feb 21 2024 11:57                                                                                                Page 2
+
+    "W65C02SXB Startup for LCD - LCDSTARTUP.asm"
+    
+
+    50                        ;;
+    51                        ;
+    52                        ;***************************************************************************
+    53                        ;endpkhdr
+    54                        
+    55                        ;***************************************************************************
+    56                        ;                               Local Constants
+    57                        ;***************************************************************************
+    58                        ;
+    59             00007FC0   	PORTB:		equ 	$7FC0 ; Port and direction Registers
+    60             00007FC1   	PORTA:		equ 	$7FC1
+    61             00007FC2   	DDRB:		equ 	$7FC2
+    62             00007FC3   	DDRA:		equ 	$7FC3
+    63                        
+    64             00000080   	E: 			equ 	%10000000 ; Enable/RW/RS pins
+    65             00000040   	RW:			equ 	%01000000
+    66             00000020   	RS:			equ		%00100000
+    67                        	
+    68                        	.sttl "LCDSTARTUP code"
+    69                        	.page
+    70                        ;***************************************************************************
+  Wed Feb 21 2024 11:57                                                                                                Page 3
+
+    "W65C02SXB Startup for LCD - LCDSTARTUP.asm"
+    "LCDSTARTUP code"
+
+    71                        ;***************************************************************************
+    72                        ;                        LCDSTARTUP Code Section
+    73                        ;***************************************************************************
+    74                        ;***************************************************************************
+    75                        ;		CHIP	65C02
+    76                        ;		LONGI	OFF
+    77                        ;		LONGA	OFF
+    78                        ;
+    79                        ;
+    80                        
+    81                        		.org	$2000
+    82                        		
+    83                        DELAY:
+    84 00:2000: EA           		NOP
+    85 00:2001: EA           		NOP
+    86 00:2002: EA           		NOP
+    87 00:2003: EA           		NOP
+    88 00:2004: EA           		NOP
+    89 00:2005: EA           		NOP
+    90 00:2006: EA           		NOP
+    91 00:2007: EA           		NOP
+    92 00:2008: EA           		NOP
+    93 00:2009: EA           		NOP
+    94 00:200A: EA           		NOP
+    95 00:200B: EA           		NOP
+    96 00:200C: EA           		NOP
+    97 00:200D: EA           		NOP
+    98 00:200E: EA           		NOP
+    99 00:200F: EA           		NOP
+   100 00:2010: EA           		NOP
+   101 00:2011: EA           		NOP
+   102 00:2012: EA           		NOP
+   103 00:2013: EA           		NOP
+   104 00:2014: EA           		NOP
+   105 00:2015: EA           		NOP
+   106 00:2016: EA           		NOP
+   107 00:2017: EA           		NOP
+   108 00:2018: EA           		NOP
+   109 00:2019: EA           		NOP
+   110 00:201A: EA           		NOP
+   111 00:201B: EA           		NOP
+   112 00:201C: EA           		NOP
+   113 00:201D: EA           		NOP
+   114 00:201E: EA           		NOP
+   115 00:201F: EA           		NOP
+   116 00:2020: EA           		NOP
+   117 00:2021: EA           		NOP
+   118 00:2022: EA           		NOP
+   119 00:2023: EA           		NOP
+   120 00:2024: EA           		NOP
+   121 00:2025: EA           		NOP
+   122 00:2026: EA           		NOP
+   123 00:2027: EA           		NOP
+   124 00:2028: EA           		NOP
+   125 00:2029: EA           		NOP
+  Wed Feb 21 2024 11:57                                                                                                Page 4
+
+    "W65C02SXB Startup for LCD - LCDSTARTUP.asm"
+    "LCDSTARTUP code"
+
+   126 00:202A: EA           		NOP
+   127 00:202B: 60           		rts
+   128                        
+   129                        ; CHOUT tells the display to write the char to the screen
+   130                        CHOUT:
+   131 00:202C: A9 20        		lda #RS
+   132 00:202E: 20 00 20     		jsr DELAY
+   133 00:2031: 8D C1 7F     		sta PORTA
+   134                        
+   135 00:2034: A9 A0        		lda #(RS|E)  ; This needs to be A0
+   136 00:2036: 20 00 20     		jsr DELAY
+   137 00:2039: 8D C1 7F     		sta PORTA
+   138                        
+   139 00:203C: A9 20        		lda #RS
+   140 00:203E: 20 00 20     		jsr DELAY
+   141 00:2041: 8D C1 7F     		sta PORTA
+   142                        
+   143 00:2044: 60           		rts
+   144                        
+   145                        ; INSTOGGLE Subroutine tells the display that the instruction is ready to execute
+   146                        INSTOGGLE: 
+   147 00:2045: A9 00        		lda #$00
+   148 00:2047: 20 00 20     		jsr DELAY
+   149 00:204A: 8D C1 7F     		sta PORTA
+   150                        		
+   151                        
+   152 00:204D: A9 80        		lda #E
+   153 00:204F: 20 00 20     		jsr DELAY
+   154 00:2052: 8D C1 7F     		sta PORTA
+   155                        		
+   156                        
+   157 00:2055: A9 00        		lda #$00
+   158 00:2057: 20 00 20     		jsr DELAY
+   159 00:205A: 8D C1 7F     		sta PORTA
+   160                        		
+   161 00:205D: 60           		rts
+   162                        
+   163                        START:
+   164                        		;sei ??
+   165 00:205E: D8           		cld ;??
+   166                        	
+   167                        	; Set output pins
+   168 00:205F: A9 FF        		lda #$ff ; %11111111
+   169 00:2061: 8D C2 7F     		sta DDRB
+   170                        
+   171 00:2064: A9 E0        		lda #$e0 ; %11100000
+   172 00:2066: 8D C3 7F     		sta DDRA
+   173                        	;.
+   174 00:2069: 20 6F 20     		jsr INIT  ; Init display
+   175 00:206C: 4C 91 20     		jmp WRITE ; Write phrase
+   176                        
+   177                        INIT:
+   178                        	;init display
+   179                        
+   180                        	; This executes too damn fast for the display
+  Wed Feb 21 2024 11:57                                                                                                Page 5
+
+    "W65C02SXB Startup for LCD - LCDSTARTUP.asm"
+    "LCDSTARTUP code"
+
+   181                        
+   182                        		; Set mode, 2 line, and font
+   183 00:206F: A9 38        		lda #$38 ; %00111000
+   184 00:2071: 8D C0 7F     		sta PORTB
+   185 00:2074: 20 45 20     		jsr INSTOGGLE
+   186                        
+   187 00:2077: 20 00 20     		jsr DELAY
+   188                        		
+   189                        		; set display on, cursor on, blink off
+   190 00:207A: A9 0E        		lda #$0e ; %00001110
+   191 00:207C: 8D C0 7F     		sta PORTB
+   192 00:207F: 20 45 20     		jsr INSTOGGLE
+   193                        
+   194 00:2082: 20 00 20     		jsr DELAY
+   195                        
+   196                        		; set inc on write, dont shift display
+   197 00:2085: A9 06        		lda #$06 ; %00000110
+   198 00:2087: 8D C0 7F     		sta PORTB
+   199 00:208A: 20 45 20     		jsr INSTOGGLE
+   200                        
+   201 00:208D: 20 00 20     		jsr DELAY
+   202                        		
+   203 00:2090: 60           		rts
+   204                        		;.
+   205                        
+   206                        WRITE:
+   207                        	; Write Chars
+   208 00:2091: A9 54        		lda #"T" ; "T"
+   209 00:2093: 8D C0 7F     		sta PORTB
+   210 00:2096: 20 2C 20     		jsr CHOUT
+   211                        
+   212 00:2099: A9 65        		lda #"e" ; "e"
+   213 00:209B: 8D C0 7F     		sta PORTB
+   214 00:209E: 20 2C 20     		jsr CHOUT
+   215                        
+   216 00:20A1: A9 73        		lda #"s" ; "s"
+   217 00:20A3: 8D C0 7F     		sta PORTB
+   218 00:20A6: 20 2C 20     		jsr CHOUT
+   219                        
+   220 00:20A9: A9 74        		lda #"t" ; "t"
+   221 00:20AB: 8D C0 7F     		sta PORTB
+   222 00:20AE: 20 2C 20     		jsr CHOUT
+   223                        
+   224                        		;jmp WRITE
+   225                        		;.
+   226                        
+   227 00:20B1: 00 00        		brk
+   228                        
+   229                        ;***************************************************************************
+   230                        ; This section to be modified to move away from code written by David Gray
+   231                        ; I don't fully understand this yet, TODO: Fix that! 
+   232                        ;***************************************************************************
+   233                        
+   234                        IRQHandler:
+   235 00:20B3: 68           		pla
+  Wed Feb 21 2024 11:57                                                                                                Page 6
+
+    "W65C02SXB Startup for LCD - LCDSTARTUP.asm"
+    "LCDSTARTUP code"
+
+   236                        		;rti
+   237                        
+   238                        
+   239                        badVec:		; $FFE0 - IRQRVD2(134)
+   240 00:20B4: 08           	php
+   241 00:20B5: 48           	pha
+   242 00:20B6: A9 FF        	lda #$FF
+   243                        				;clear Irq
+   244 00:20B8: 68           	pla
+   245 00:20B9: 28           	plp
+   246                        	;rti
+   247                        
+   248                        
+   249                        ;***************************************************************************
+   250                        ;***************************************************************************
+   251                        ; New for WDCMON V1.04
+   252                        ;  Needed to move Shadow Vectors into proper area
+   253                        ;***************************************************************************
+   254                        ;***************************************************************************
+   255                        	SH_vectors:	section
+   256                        Shadow_VECTORS	SECTION OFFSET $7EFA
+   257                        					;65C02 Interrupt Vectors
+   258                        					; Common 8 bit Vectors for all CPUs
+   259                        
+   260 00:7EFA: B4 20        		dw	badVec		; $FFFA -  NMIRQ (ALL)
+   261 00:7EFC: 5E 20        		dw	START		; $FFFC -  RESET (ALL)
+   262 00:7EFE: B3 20        		dw	IRQHandler	; $FFFE -  IRQBRK (ALL)
+   263                        
+   264 00:7F00:              	        ends
+   265                        
+   266                        
+   267                        ;***************************************************************************
+   268                        
+   269                        vectors	SECTION OFFSET $FFFA
+   270                        					;65C02 Interrupt Vectors
+   271                        					; Common 8 bit Vectors for all CPUs
+   272                        
+   273 00:FFFA: B4 20        		dw	badVec		; $FFFA -  NMIRQ (ALL)
+   274 00:FFFC: 5E 20        		dw	START		; $FFFC -  RESET (ALL)
+   275 00:FFFE: B3 20        		dw	IRQHandler	; $FFFE -  IRQBRK (ALL)
+   276                        
+   277 01:0000:              	        ends
+   278                        
+   279                        	        end
+
+
+      Lines assembled: 279
+      Errors: 0
